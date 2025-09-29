@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="plugin" group="task" method="upgrade">
+	<name>plg_task_deletevmoldorders</name>
+    <creationDate>2025-09-29</creationDate>
+    <author>MGS Creativa</author>
+    <copyright>This plugin is released under the GNU/GPL License version 2</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <authorEmail>martin@mgscreativa.com</authorEmail>
+    <authorUrl>https://www.mgscreativa.com</authorUrl>
+	<version>1.0.0</version>
+	<description>PLG_TASK_DELETEVMOLDORDERS_XML_DESCRIPTION</description>
+	<namespace path="src">Joomla\Plugin\Task\Deletevmoldorders</namespace>
+	<files>
+		<folder plugin="deletevmoldorders">forms</folder>
+        <folder>language</folder>
+        <folder>services</folder>
+        <folder>src</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/plg_task_deletevmoldorders.ini</language>
+		<language tag="en-GB">language/en-GB/plg_task_deletevmoldorders.sys.ini</language>
+	</languages>
+</extension>

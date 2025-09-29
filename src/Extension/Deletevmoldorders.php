@@ -90,11 +90,13 @@ class Deletevmoldorders extends CMSPlugin implements SubscriberInterface
 		$db                    = $this->getDatabase();
 		$olderThan             = (int) $event->getArgument('params')->older_than ?? 1;
 		$filterOrderStatus     = $event->getArgument('params')->filter_order_status ?? '';
+		$limitProcess          = (int) $event->getArgument('params')->limit_process ?? 0;
 		$filterOrderStatusText = '';
 		$failed                = false;
 
 		$this->logTask('olderThan ' . $olderThan);
 		$this->logTask('filterOrderStatus ' . $filterOrderStatus);
+		$this->logTask('limitProcess ' . $limitProcess);
 
 		$jnow   = Factory::getDate();
 		$minusT = date('Y-m-d H:i:s', strtotime('-' . $olderThan . ' days', strtotime($jnow)));
@@ -124,7 +126,10 @@ class Deletevmoldorders extends CMSPlugin implements SubscriberInterface
 			}
 		}
 
-		$q .= ' LIMIT 50;';
+		if (!empty($limitProcess))
+		{
+			$q .= ' LIMIT 50';
+		}
 
 		$this->logTask('Old orders search query ' . $q);
 
@@ -159,7 +164,7 @@ class Deletevmoldorders extends CMSPlugin implements SubscriberInterface
 			\VmConfig::loadConfig();
 			\vmLanguage::loadJLang('com_virtuemart', true);
 
-			$this->logTask('Deleting Vm orders older than ' . $minusT . ' with status ' . $filterOrderStatus);
+			$this->logTask('Deleting Vm orders older than ' . $minusT . ' with status ' . $filterOrderStatusText);
 
 			$odersModel = \VmModel::getModel('orders');
 			$odersModel->remove($order_ids, false);
